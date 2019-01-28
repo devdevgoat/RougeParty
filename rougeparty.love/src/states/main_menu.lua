@@ -17,8 +17,8 @@ local Menu = Concord.instance() --this world
 
 
 --Initialize Logic
-Menu:addSystem(Systems.ButtonManager(), "draw")
-Menu:addSystem(Systems.ButtonManager(), "mousepressed")
+Menu:addSystem(Systems.UIManager(), "draw")
+Menu:addSystem(Systems.UIManager(), "mousepressed")
 
 --Add the buttons to the menu
 for key, value in next, Entities.MainMenu do

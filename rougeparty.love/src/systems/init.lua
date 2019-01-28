@@ -1,6 +1,9 @@
 local PATH = (...):gsub('%.init$', '')
 
 return {
-    ButtonManager = require(PATH..".ButtonManager"),
-    PlayerManager = require(PATH..".PlayerManager")
+    UIManager = require(PATH..".UIManager"),
+    PlayerManager = require(PATH..".PlayerManager"),
+    PlayerController = require(PATH..".PlayerController"),
+    Gravity = require(PATH.. ".Gravity"),
+    CameraController = require(PATH.. ".CameraController")
 }

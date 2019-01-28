@@ -1,4 +1,4 @@
-
+---DONT FORGET TO EXPOSE IN INIT!
 local Concord = require("lib").init({
     useEvents = false
 })
@@ -8,10 +8,10 @@ local Component = require('src.components')
 local Entity = require('src.entities')
 local System    = Concord.system
 
-local ButtonManager = {}
-ButtonManager = System({Component.Button, Component.Position, Component.Area})
+local UIManager = {}
+UIManager = System({Component.Button, Component.Position, Component.Area})
 
-function ButtonManager:draw()
+function UIManager:draw()
     local e
     for i = 1, self.pool.size do
         e = self.pool:get(i)
@@ -33,7 +33,7 @@ function ButtonManager:draw()
     end
 end
 
-function ButtonManager:mousepressed(x, y, button, istouch)
+function UIManager:mousepressed(x, y, button, istouch)
     local e 
     for i = 1, self.pool.size do
         e = self.pool:get(i)
@@ -51,4 +51,4 @@ function ButtonManager:mousepressed(x, y, button, istouch)
     end
 end
 
-return ButtonManager
+return UIManager

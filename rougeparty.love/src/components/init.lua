@@ -10,5 +10,7 @@ return {
     Sprite = require(PATH..".Sprite"),
     Bindings = require(PATH..".Bindings"),
     Gravity = require(PATH..".Gravity"),
-    Player = require(PATH..".Player")
+    Player = require(PATH..".Player"),
+    Projectile = require(PATH..".Projectile"),
+    UI = require(PATH..".UI")
 }

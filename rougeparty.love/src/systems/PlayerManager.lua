@@ -2,10 +2,8 @@
 inspect = require('lib.inspect')
 local transform = love.math.newTransform()
 local Concord = require("lib").init({
-    useEvents = false
+    useEvents = true
 })
-
-
 
 local Component = require('src.components')
 local Entity = require('src.entities')
@@ -16,20 +14,6 @@ local System    = Concord.system
 local PlayerManager = {}
 PlayerManager = System({Component.Player,Component.Position, Component.Sprite})
 
-
-function PlayerManager:init(world,player)
-    local e
-    for i = 1, self.pool.size do
-        e = self.pool:get(i)
-
-        local position    = e:get(Component.Position)
-        local area     = e:get(Component.Area)
-
-        world:add(player, position.x,position.y, area.w,area.h)
-
-    end
-
-end
 
 function PlayerManager:draw()
     local e
@@ -44,8 +28,6 @@ function PlayerManager:draw()
         love.graphics.rectangle("line", position.x, position.y, sprite.w, sprite.h)
         love.graphics.print('Name:'..player.name,0,0)
         love.graphics.print('Health:' ..player.currhealth..'/'..player.maxhealth,0,24)
-        --love.graphics.print('dx:' ..position.dx ,0,48)
-        --love.graphics.print('dy:' ..position.dy ,0,62)
         --- this is for scrolling ... love.graphics.applyTransform(transform)
     end
 end
@@ -56,7 +38,7 @@ function PlayerManager:update(dt)
         e = self.pool:get(i)
         local position    = e:get(Component.Position)
         local goalX, goalY = position.x + (position.vx * dt), position.y + (position.vy * dt)
-        local actualX, actualY, cols, len = world:move(Player, goalX, goalY)
+        local actualX, actualY, cols, len = world:move(e, goalX, goalY)
         position:setDelta(position.x-actualX,position.y-actualY)
         position:translate(actualX,actualY)
         position:applyDamping(dt)

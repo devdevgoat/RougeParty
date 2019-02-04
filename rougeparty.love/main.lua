@@ -1,31 +1,36 @@
 state=require("lib.stateswitcher")
-step=tonumber(passvar[1])
 state.clear()
 
-function love.load()
-   font = love.graphics.setNewFont( 24 )   
-   
-end 
+local Concord = require("lib").init({
+   useEvents = true
+})
 
-function love.draw()
-   love.graphics.setBackgroundColor(0.3,0.3,0.3)
-   love.graphics.setColor(255,30,30)
-   if (step~=2) then
-      love.graphics.printf("Welcome to my game!",50,50,love.graphics.getWidth()-100)
-   else
-      love.graphics.printf("Thanks for playing!",50,50,love.graphics.getWidth()-100)
-   end
-   love.graphics.setColor(255,255,255)
-   love.graphics.printf("Press any key to switch to open the menu.",100,200,love.graphics.getWidth()-200)
-end
+font = love.graphics.setNewFont( 24 )   
+love.graphics.setBackgroundColor(0.3,0.3,0.3)
+
+local Systems = require("src.systems")
+local Component  = require("src.components")
+local Entity  = Concord.entity
+
+Welcome = Concord.instance() --this world
+
+Play = Entity()
+
+Play:give(Component.UI, 'button')
+        :give(Component.Position, 100,200)
+        :give(Component.Area, 200,50 )
+        :give(Component.Button,"BtnPlay","Start",function () state.switch("src.states.start_menu") end  )
+        :give(Component.Color, 255, 255, 255, 1 )
+        :apply()
+
+Welcome:addEntity(Play)
+
+Welcome:addSystem(Systems.UIManager(), "draw")
+Welcome:addSystem(Systems.UIManager(), "mousepressed")
+Welcome:addSystem(Systems.UIManager(), "keypressed")
 
 
-function love.keyreleased(key)
-   state.switch("src.states.main_menu")
-end
+Concord.addInstance(Welcome)
 
-function love.update(dt)
-   if love.keyboard.isDown("escape") then
-      love.event.push("quit")
-   end
-end
+
+print('main.lua loaded')

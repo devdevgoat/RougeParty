@@ -1,6 +1,6 @@
 --don't forget to expose in init.lua!!!
 local Concord = require("lib").init({
-    useEvents = false
+    useEvents = true
 })
 
 local Component = Concord.component
@@ -9,11 +9,12 @@ local Bindings = {}
 local Red = {
     keys = {
         canHold = {
-            left       = "movePlayerLeft",
-            right       = "movePlayerRight",
-            up       = "movePlayerUp",
-            down       = "movePlayerDown",
+            a       = "movePlayerLeft",
+            d       = "movePlayerRight",
+            w       = "movePlayerUp",
+            s       = "movePlayerDown",
         },
+        p     = "instantiatePlayer",
         escape     = "quit",
         space       = "jump",
         ["return"] = "select", -- return is a keyword that's why it has to be written like this
@@ -27,6 +28,10 @@ local Red = {
             right       = "movePlayerRight",
         },
             back = "backToGame",
+    },
+    mouse = {
+        primary = "fireStandard", 
+        secondary = "fireSpecial", 
     }
 }
 

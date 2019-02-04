@@ -12,7 +12,6 @@ local MainMenu = {
     BtnPlay = Entity()
 }
 
-
 -- Assin Components
 MainMenu.BtnBack:give(Component.Position, 100,260)
     :give(Component.Button,"BntBack","Quit",function () state.switch("main;2") end  )

@@ -1,5 +1,5 @@
 local Concord = require("lib").init({
-    useEvents = false
+    useEvents = true
 })
 
 local Component = Concord.component

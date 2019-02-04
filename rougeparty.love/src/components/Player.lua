@@ -12,6 +12,7 @@ local Player = Component(function(e, name,maxhealth,currhealth,isLocal)
     e.name = name
     e.maxhealth = maxhealth
     e.currhealth = currhealth
+    e.isPlayer = true
 end)
 
 function Player:updateHealth(dh)
